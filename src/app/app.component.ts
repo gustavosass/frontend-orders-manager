@@ -11,5 +11,5 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend-orders-manager-ng';
+  title = 'Orders Manager';
 }
