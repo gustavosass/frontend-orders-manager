@@ -1,0 +1,21 @@
+<mat-sidenav-container class="dashboard-layout">
+  <mat-sidenav #drawer
+    mode="side"
+    [opened]="true"
+    class="sidebar-sidenav"
+    [class.collapsed]="sidebarCollapsed">
+    <app-sidebar [collapsed]="sidebarCollapsed" (collapsedChange)="sidebarCollapsed = $event"></app-sidebar>
+  </mat-sidenav>
+  
+  <mat-sidenav-content [class.content-shifted]="!sidebarCollapsed" [class.content-normal]="sidebarCollapsed">
+    <div class="dashboard-content">
+      <mat-card class="welcome-card">
+        <mat-card-title>Bem-vindo!</mat-card-title>
+        <mat-card-content>
+          <p>Olá{{ email ? ',' : '' }} <span *ngIf="email">{{ email }}</span>!</p>
+          <p>Gerencie seus pedidos de forma rápida e eficiente.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

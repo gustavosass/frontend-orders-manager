@@ -1,0 +1,14 @@
+<mat-toolbar class="sidebar-toolbar" style="height:56px;">
+  <span *ngIf="!collapsed">Orders Manager</span>
+</mat-toolbar>
+<mat-nav-list [class.collapsed]="collapsed">
+  <mat-list-item *ngFor="let item of sidebarItems" [routerLink]="item.route" routerLinkActive="active" style="cursor:pointer;">
+    <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+    <span matLine *ngIf="!collapsed">{{ item.label }}</span>
+  </mat-list-item>
+</mat-nav-list>
+<div class="sidebar-footer">
+  <button mat-icon-button (click)="toggleCollapse()" aria-label="Recolher menu">
+    <mat-icon>{{ collapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+  </button>
+</div>
