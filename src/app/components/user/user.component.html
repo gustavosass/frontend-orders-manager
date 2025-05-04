@@ -1,18 +1,16 @@
 <mat-sidenav-container class="dashboard-layout">
-  <mat-sidenav #drawer
-    mode="side"
-    [opened]="true"
-    class="sidebar-sidenav"
-    [class.collapsed]="sidebarCollapsed">
+  <mat-sidenav #drawer mode="side" [opened]="true" class="sidebar-sidenav" [class.collapsed]="sidebarCollapsed">
     <app-sidebar [collapsed]="sidebarCollapsed" (collapsedChange)="sidebarCollapsed = $event"></app-sidebar>
   </mat-sidenav>
 
   <mat-sidenav-content [class.content-shifted]="!sidebarCollapsed" [class.content-normal]="sidebarCollapsed">
     <div class="dashboard-content">
-      <mat-toolbar color="primary" class="mat-elevation-z2" style="margin-bottom: 24px;">
+      <mat-toolbar class="mat-elevation-z2" style="margin-bottom: 24px;">
         <span>Usuários</span>
         <span class="spacer"></span>
-        <!-- Futuras ações: <button mat-icon-button><mat-icon>add</mat-icon></button> -->
+        <button mat-icon-button color="primary" (click)="createUser()">
+          <mat-icon>add</mat-icon>
+        </button>
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
@@ -33,14 +31,32 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
                 <td mat-cell *matCellDef="let user">{{ user.email }}</td>
               </ng-container>
+              <!-- Role Column -->
+              <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Permissão</th>
+                <td mat-cell *matCellDef="let user">{{ user.role}}</td>
+              </ng-container>
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Ações</th>
+                <td mat-cell *matCellDef="let user">
+                  <button mat-icon-button color="primary" (click)="updateUser(user)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" (click)="deleteUser(user.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <tr mat-header-row *matHeaderRowDef="['id', 'name', 'email', 'role', 'actions']"></tr>
+              <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'email', 'role', 'actions'];"></tr>
             </table>
-            <mat-paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+            <mat-paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"
+              showFirstLastButtons></mat-paginator>
           </div>
           <tr mat-row *matNoDataRow>
-            <td colspan="3" class="no-users">Nenhum usuário encontrado.</td>
+            <td colspan="5" class="no-users">Nenhum usuário encontrado.</td>
           </tr>
         </mat-card-content>
       </mat-card>
