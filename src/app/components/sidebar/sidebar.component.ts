@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +30,15 @@ export class SidebarComponent {
     { label: 'Usuários', icon: 'people', route: '/users' },
     { label: 'Logout', icon: 'logout', route: '/login' }
   ];
+
+  constructor(private router: Router) {}
+
+  onSidebarItemClick(item: SidebarItem) {
+    if (item.label === 'Logout') {
+      localStorage.clear();
+    }
+    this.router.navigate([item.route]);
+  }
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
