@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserComponent } from './components/user/user.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { LoginComponent } from '../components/login/login.component';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { UserComponent } from '../components/user/user.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
