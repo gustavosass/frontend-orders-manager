@@ -42,34 +42,35 @@
 
         <div class="form-row">
           <mat-form-field appearance="outline" class="form-field">
-  <mat-label>CPF/CNPJ</mat-label>
-  <input matInput formControlName="document" placeholder="000.000.000-00" required
-    [mask]="documentMask"
-    [dropSpecialCharacters]="false">
-  <mat-icon matSuffix>badge</mat-icon>
-  <mat-error *ngIf="formControls['document'].errors?.['required']">
-    Documento é obrigatório
-  </mat-error>
-  <mat-error *ngIf="formControls['document'].errors?.['cpfCnpj'] && !formControls['document'].errors?.['required']">
-    CPF ou CNPJ inválido
-  </mat-error>
-</mat-form-field>
+            <mat-label>CPF/CNPJ</mat-label>
+            <input matInput formControlName="document" placeholder="000.000.000-00" required [mask]="documentMask"
+              [dropSpecialCharacters]="false">
+            <mat-icon matSuffix>badge</mat-icon>
+            <mat-error *ngIf="formControls['document'].errors?.['required']">
+              Documento é obrigatório
+            </mat-error>
+            <mat-error
+              *ngIf="formControls['document'].errors?.['cpfCnpj'] && !formControls['document'].errors?.['required']">
+              CPF ou CNPJ inválido
+            </mat-error>
+          </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
-  <mat-label>Telefone</mat-label>
-  <input matInput formControlName="phone" placeholder="(00) 00000-0000" mask="(00) 00000-0000" [dropSpecialCharacters]="false">
-  <mat-icon matSuffix>phone</mat-icon>
-</mat-form-field>
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="phone" placeholder="(00) 00000-0000" mask="(00) 00000-0000"
+              [dropSpecialCharacters]="false">
+            <mat-icon matSuffix>phone</mat-icon>
+          </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
-  <mat-label>Data de Nascimento</mat-label>
-  <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-  <mat-error *ngIf="formControls['birthDate'].errors?.['required']">
-    Data de nascimento obrigatória
-  </mat-error>
-</mat-form-field>
+            <mat-label>Data de Nascimento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="birthDate" required (dateInput)="onDateChange($event)" (change)="onDateChange($event)" (blur)="onDateBlur($event)" autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="formControls['birthDate'].errors?.['required']">
+              Data de nascimento obrigatória
+            </mat-error>
+          </mat-form-field>
         </div>
       </mat-card-content>
     </mat-card>
@@ -148,7 +149,8 @@
           <!-- State Dropdown -->
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Estado</mat-label>
-            <mat-select formControlName="stateId" (selectionChange)="onStateChange($event.value)" [disabled]="!states.length" required>
+            <mat-select formControlName="stateId" (selectionChange)="onStateChange($event.value)"
+              [disabled]="!states.length" required>
               <mat-option *ngFor="let state of states" [value]="state.id">
                 {{ state.name }} ({{ state.initials }})
               </mat-option>

@@ -7,7 +7,7 @@
       <mat-toolbar color="primary" class="mat-elevation-z2" style="margin-bottom: 24px;">
         <span>Clientes</span>
         <span class="spacer"></span>
-        <button mat-icon-button color="accent" (click)="createClient()">
+        <button mat-icon-button (click)="createClient()">
           <mat-icon>add</mat-icon>
         </button>
       </mat-toolbar>
@@ -53,8 +53,8 @@
                 <td mat-cell *matCellDef="let client">
                   <button mat-icon-button color="primary" (click)="updateClient(client)" matTooltip="Editar">
                     <mat-icon>edit</mat-icon>
-                  </button>
-                  <button mat-icon-button color="warn" (click)="deleteClient(client.id!)" matTooltip="Excluir">
+                  </button><!--
+                  --><button mat-icon-button color="warn" (click)="deleteClient(client.id!)" matTooltip="Excluir">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>

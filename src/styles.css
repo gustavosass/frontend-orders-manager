@@ -21,3 +21,9 @@ h.mat-mdc-snack-bar-container.error-snackbar {
 .mat-mdc-snack-bar-container.error-snackbar .mdc-snackbar__label {
   color: white !important;
 }
+
+/* Definir a cor customizada para todas as toolbars primary */
+.mat-toolbar.mat-primary {
+  background-color: #000000 !important;
+  color: white !important;
+}

@@ -1,14 +1,7 @@
 .dashboard-layout {
-  height: calc(100vh - 64px);
+  height: 100%;
   width: 100%;
   background: var(--background-light);
-}
-
-.sidebar-sidenav {
-  transition: width 0.3s ease;
-  background: var(--sidebar-bg) !important;
-  color: var(--sidebar-text) !important;
-  border: none !important;
 }
 
 .sidebar-sidenav.collapsed {
@@ -38,7 +31,6 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background: var(--background-content);
 }
 
 mat-card {
@@ -51,6 +43,21 @@ mat-card {
   color: #888;
   font-size: 1.1rem;
   margin-top: 24px;
+}
+
+td[mat-cell] {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+td[mat-cell] button.mat-icon-button {
+  display: inline-flex;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+td[mat-cell] button.mat-icon-button:last-child {
+  margin-right: 0;
 }
 
 @media (max-width: 600px) {

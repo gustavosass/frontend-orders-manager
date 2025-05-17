@@ -1,14 +1,13 @@
-<mat-toolbar class="sidebar-toolbar" style="height:56px;">
-  <span *ngIf="!collapsed">Orders Manager</span>
+<mat-toolbar class="sidebar-toolbar mat-elevation-z2">
+  <span *ngIf="!collapsed" class="sidebar-title">Orders Manager</span>
 </mat-toolbar>
+<button class="expand-fab" mat-icon-button (click)="toggleCollapse()" aria-label="Recolher menu">
+  <mat-icon>{{ collapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+</button>
 <mat-nav-list [class.collapsed]="collapsed">
-  <mat-list-item *ngFor="let item of sidebarItems" [routerLink]="item.route" routerLinkActive="active" style="cursor:pointer;">
+  <a mat-list-item *ngFor="let item of sidebarItems" [routerLink]="item.route" routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact:true}" (click)="onSidebarItemClick(item)" matRipple>
     <mat-icon matListIcon>{{ item.icon }}</mat-icon>
-    <span matLine *ngIf="!collapsed">{{ item.label }}</span>
-  </mat-list-item>
+    <span class="nav-label" matLine *ngIf="!collapsed">{{ item.label }}</span>
+  </a>
 </mat-nav-list>
-<div class="sidebar-footer">
-  <button mat-icon-button (click)="toggleCollapse()" aria-label="Recolher menu">
-    <mat-icon>{{ collapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
-  </button>
-</div>

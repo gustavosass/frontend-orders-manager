@@ -65,6 +65,31 @@ interface AddressFormValue {
   ]
 })
 export class ClientFormComponent implements OnInit {
+
+  onDateBlur(event: any) {
+    let value = event.target.value;
+    if (typeof value === 'string' && value.trim()) {
+      // Se a data foi digitada sem barras e tem 8 dígitos, insere as barras
+      if (/^\d{8}$/.test(value)) {
+        value = value.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3');
+        event.target.value = value; // Atualiza o valor exibido no input
+      }
+      const parts = value.split('/');
+      if (parts.length === 3) {
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const year = parseInt(parts[2], 10);
+        const parsedDate = new Date(year, month, day);
+        if (!isNaN(parsedDate.getTime())) {
+          this.clientForm.get('birthDate')?.setValue(parsedDate);
+        }
+      }
+    }
+  }
+  onDateChange(event: any) {
+    // Mantido para compatibilidade com o template
+  }
+
   get documentMask(): string {
     const value = this.clientForm?.get('document')?.value || '';
     const digits = value.replace(/\D/g, '');
