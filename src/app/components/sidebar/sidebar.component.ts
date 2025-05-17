@@ -27,12 +27,15 @@ export class SidebarComponent {
   @Output() collapsedChange = new EventEmitter<boolean>();
   sidebarItems: SidebarItem[] = [
     { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
-    { label: 'Usuários', icon: 'people', route: '/users' },
+    { label: 'Usuários', icon: 'supervisor_account', route: '/users' },
     { label: 'Clientes', icon: 'people', route: '/clients' },
+    { label: 'Configurações', icon: 'tune', route: '/settings' },
     { label: 'Logout', icon: 'logout', route: '/login' }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.sidebarItems = this.sidebarItems;
+  }
 
   onSidebarItemClick(item: SidebarItem) {
     if (item.label === 'Logout') {
