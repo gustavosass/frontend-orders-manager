@@ -1,0 +1,201 @@
+<mat-toolbar color="primary">
+  <h2 class="dialog-title">{{ isEdit ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="onCancel()" matTooltip="Fechar">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-dialog-content class="dialog-content">
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="client-form">
+    <!-- Dados Pessoais -->
+    <mat-card class="form-section">
+      <mat-card-header>
+        <mat-card-title>Dados Pessoais</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Nome Completo</mat-label>
+            <input matInput formControlName="name" placeholder="Digite o nome completo" required>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error *ngIf="formControls['name'].errors?.['required']">
+              Nome é obrigatório
+            </mat-error>
+            <mat-error *ngIf="formControls['name'].errors?.['minlength']">
+              Nome deve ter pelo menos 3 caracteres
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="email@exemplo.com" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="formControls['email'].errors?.['required']">
+              Email é obrigatório
+            </mat-error>
+            <mat-error *ngIf="formControls['email'].errors?.['email']">
+              Por favor, insira um email válido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+  <mat-label>CPF/CNPJ</mat-label>
+  <input matInput formControlName="document" placeholder="000.000.000-00" required
+    [mask]="documentMask"
+    [dropSpecialCharacters]="false">
+  <mat-icon matSuffix>badge</mat-icon>
+  <mat-error *ngIf="formControls['document'].errors?.['required']">
+    Documento é obrigatório
+  </mat-error>
+  <mat-error *ngIf="formControls['document'].errors?.['cpfCnpj'] && !formControls['document'].errors?.['required']">
+    CPF ou CNPJ inválido
+  </mat-error>
+</mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+  <mat-label>Telefone</mat-label>
+  <input matInput formControlName="phone" placeholder="(00) 00000-0000" mask="(00) 00000-0000" [dropSpecialCharacters]="false">
+  <mat-icon matSuffix>phone</mat-icon>
+</mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+  <mat-label>Data de Nascimento</mat-label>
+  <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <mat-error *ngIf="formControls['birthDate'].errors?.['required']">
+    Data de nascimento obrigatória
+  </mat-error>
+</mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Endereço -->
+    <mat-card class="form-section">
+      <mat-card-header>
+        <mat-card-title>Endereço</mat-card-title>
+      </mat-card-header>
+      <mat-card-content formGroupName="addressUpdateDTO">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>CEP</mat-label>
+            <input matInput formControlName="postalCode" placeholder="00000-000" required>
+            <mat-icon matSuffix>local_post_office</mat-icon>
+            <mat-error *ngIf="getAddressControl('postalCode')?.hasError('required')">
+              CEP é obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Rua</mat-label>
+            <input matInput formControlName="street" placeholder="Nome da rua" required>
+            <mat-icon matSuffix>home</mat-icon>
+            <mat-error *ngIf="getAddressControl('street')?.hasError('required')">
+              Rua é obrigatória
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Número</mat-label>
+            <input matInput formControlName="number" placeholder="Número" required>
+            <mat-icon matSuffix>tag</mat-icon>
+            <mat-error *ngIf="getAddressControl('number')?.hasError('required')">
+              Número é obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Bairro</mat-label>
+            <input matInput formControlName="district" placeholder="Bairro" required>
+            <mat-icon matSuffix>location_city</mat-icon>
+            <mat-error *ngIf="getAddressControl('district')?.hasError('required')">
+              Bairro é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Complemento</mat-label>
+          <input matInput formControlName="complement" placeholder="Complemento">
+          <mat-icon matSuffix>add_location_alt</mat-icon>
+        </mat-form-field>
+
+        <div class="form-row">
+          <!-- Country Dropdown -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>País</mat-label>
+            <mat-select formControlName="countryId" (selectionChange)="onCountryChange($event.value)" required>
+              <mat-option *ngFor="let country of countries" [value]="country.id">
+                {{ country.name }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>public</mat-icon>
+            <mat-hint *ngIf="loadingCountries" class="loading-hint">
+              <mat-spinner diameter="20"></mat-spinner>
+              <span>Carregando países...</span>
+            </mat-hint>
+            <mat-error *ngIf="getAddressControl('countryId')?.hasError('required')">
+              País é obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <!-- State Dropdown -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="stateId" (selectionChange)="onStateChange($event.value)" [disabled]="!states.length" required>
+              <mat-option *ngFor="let state of states" [value]="state.id">
+                {{ state.name }} ({{ state.initials }})
+              </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>map</mat-icon>
+            <mat-hint *ngIf="loadingStates" class="loading-hint">
+              <mat-spinner diameter="20"></mat-spinner>
+              <span>Carregando estados...</span>
+            </mat-hint>
+            <mat-error *ngIf="getAddressControl('stateId')?.hasError('required')">
+              Estado é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- City Dropdown -->
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Cidade</mat-label>
+            <mat-select formControlName="cityId" [disabled]="!cities.length" required>
+              <mat-option *ngFor="let city of cities" [value]="city.id">
+                {{ city.name }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>location_city</mat-icon>
+            <mat-hint *ngIf="loadingCities" class="loading-hint">
+              <mat-spinner diameter="20"></mat-spinner>
+              <span>Carregando cidades...</span>
+            </mat-hint>
+            <mat-error *ngIf="getAddressControl('cityId')?.hasError('required')">
+              Cidade é obrigatória
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button color="warn" (click)="onCancel()" [disabled]="loading">
+    <mat-icon>cancel</mat-icon>
+    Cancelar
+  </button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="clientForm.invalid || loading">
+    <mat-icon *ngIf="!loading">{{ isEdit ? 'save' : 'add' }}</mat-icon>
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+    {{ isEdit ? 'Atualizar' : 'Salvar' }}
+  </button>
+</mat-dialog-actions>

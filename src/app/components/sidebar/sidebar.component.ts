@@ -28,10 +28,11 @@ export class SidebarComponent {
   sidebarItems: SidebarItem[] = [
     { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
     { label: 'Usuários', icon: 'people', route: '/users' },
+    { label: 'Clientes', icon: 'people', route: '/clients' },
     { label: 'Logout', icon: 'logout', route: '/login' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   onSidebarItemClick(item: SidebarItem) {
     if (item.label === 'Logout') {

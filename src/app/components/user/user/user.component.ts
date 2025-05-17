@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserService, User } from '../../services/user.service';
+import { UserService, User } from '../../../services/user.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +13,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { UserPasswordComponent } from '../user-password/user-password.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { firstValueFrom } from 'rxjs';
 
 @Component({

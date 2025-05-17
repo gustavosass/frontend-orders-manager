@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { User } from '../../services/user.service';
+import { User } from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-form',
