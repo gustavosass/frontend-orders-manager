@@ -1,0 +1,44 @@
+/* User Form Dialog Styling */
+.form-container {
+  width: 400px;
+  padding: 24px;
+}
+
+.mat-dialog-title {
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  font-weight: 500;
+  .full-width {
+    width: 100%;
+  }
+}
+
+.mat-dialog-content {
+  padding: 16px 0;
+  margin: 0;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0.25em 0;
+}
+
+.mat-dialog-actions {
+  padding: 16px 0 0 0;
+  margin: 0;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .form-container {
+    width: 100%;
+    padding: 16px;
+  }
+}

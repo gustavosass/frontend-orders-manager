@@ -1,9 +1,23 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+h.mat-mdc-snack-bar-container.error-snackbar {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-container.error-snackbar .mdc-snackbar__surface {
+  background-color: #f44336 !important;
+}
+
+.mat-mdc-snack-bar-container.error-snackbar .mdc-snackbar__label {
+  color: white !important;
 }
