@@ -25,139 +25,47 @@
 
 .content-shifted {
   margin-left: 220px !important;
-  transition: margin-left 0.3s ease;
 }
 
 .content-normal {
   margin-left: 64px !important;
-  transition: margin-left 0.3s ease;
 }
 
 .dashboard-content {
   padding: 32px 24px;
   min-height: 100vh;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   background: var(--background-content);
 }
 
 mat-card {
   width: 100%;
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 24px;
-  box-sizing: border-box;
 }
 
-.mat-toolbar {
-  background-color: white;
-  border-radius: 4px;
-  margin-bottom: 24px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.filter-container {
-  margin-bottom: 1.5rem;
-  padding: 0 8px;
-}
-
-.filter-field {
-  width: 100%;
-  max-width: 400px;
-}
-
-.mat-table {
-  width: 100%;
-  margin-bottom: 1rem;
-  border-collapse: collapse;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.mat-header-cell {
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #f5f7fa;
-  font-size: 14px;
-}
-
-.mat-cell,
-.mat-header-cell {
-  padding: 0 16px;
-  white-space: nowrap;
-}
-
-.mat-row:hover {
-  background-color: #f5f7fa;
-  cursor: pointer;
-}
-
-.mat-paginator {
-  margin-top: 1rem;
-  background-color: transparent;
-  justify-content: center;
-}
-
-/* Responsive adjustments */
-@media (max-width: 960px) {
-  .dashboard-content {
-    padding: 24px 16px;
-  }
-  
-  mat-card {
-    padding: 16px;
-  }
-  
-  .mat-toolbar {
-    margin-bottom: 16px;
-  }
+.no-users {
+  color: #888;
+  font-size: 1.1rem;
+  margin-top: 24px;
 }
 
 @media (max-width: 600px) {
   .dashboard-content {
-    padding: 12px 8px;
+    padding: 12px 2px;
   }
-  
+
   mat-card {
-    padding: 12px 8px;
-    margin: 8px 0;
-    border-radius: 8px;
+    padding: 8px;
+    margin: 12px 2px 0 2px;
+    min-width: unset;
   }
-  
-  .mat-toolbar {
-    margin-bottom: 12px;
-    border-radius: 8px;
-  }
-  
-  .filter-container {
-    padding: 0 4px;
-    margin-bottom: 12px;
-  }
-  
-  .filter-field {
-    width: 100%;
-  }
-  
-  .mat-table {
-    min-width: 600px;
-    font-size: 13px;
-  }
-  
-  .mat-cell, 
-  .mat-header-cell {
-    padding: 0 8px;
-  }
-  
-  .mat-paginator {
-    margin-top: 8px;
-  }
+}
+
+.spacer {
+  display: inline-block;
+  width: 16px;
 }
