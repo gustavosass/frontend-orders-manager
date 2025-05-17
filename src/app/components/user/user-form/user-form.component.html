@@ -1,47 +1,46 @@
-<h2 mat-dialog-title>{{ isEdit ? 'Edit User' : 'Create User' }}</h2>
-
-<mat-dialog-content>
-  <form (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-icon matPrefix>person</mat-icon>
-      <mat-label>Full Name</mat-label>
+<mat-card class="mat-elevation-z4" style="max-width: 480px; margin: 0 auto;">
+  <mat-toolbar color="primary" style="border-radius: 4px 4px 0 0; margin-bottom: 16px; justify-content: space-between;">
+    <span>{{ isEdit ? 'Editar Usuário' : 'Novo Usuário' }}</span>
+    <button mat-icon-button (click)="onCancel()" matTooltip="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <form (ngSubmit)="onSubmit()" style="padding: 0 24px 24px 24px;">
+    <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 18px;">
+      <mat-label>Nome completo</mat-label>
       <input matInput [(ngModel)]="user.name" name="name" required>
-      <mat-hint>Enter the full name</mat-hint>
+      <mat-icon matPrefix>person</mat-icon>
     </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-icon matPrefix>email</mat-icon>
+    <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 18px;">
       <mat-label>Email</mat-label>
       <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+      <mat-icon matPrefix>email</mat-icon>
     </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-icon matPrefix>supervised_user_circle</mat-icon>
-      <mat-label>User Role</mat-label>
+    <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 18px;">
+      <mat-label>Perfil</mat-label>
       <mat-select [(ngModel)]="user.role" name="role" required>
-        <mat-option value="USER">USER</mat-option>
-        <mat-option value="ADMIN">ADMIN</mat-option>
+        <mat-option value="USER">Usuário</mat-option>
+        <mat-option value="ADMIN">Administrador</mat-option>
       </mat-select>
+      <mat-icon matPrefix>supervisor_account</mat-icon>
     </mat-form-field>
-
     <ng-container *ngIf="!isEdit">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-icon matPrefix>lock</mat-icon>
-        <mat-label>Password</mat-label>
-        <input matInput [type]="showPassword ? 'text' : 'password'" [(ngModel)]="user.password" name="password" 
-          [required]="isPasswordRequired" autocomplete="current-password">
-        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+      <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 18px;">
+        <mat-label>Senha</mat-label>
+        <input matInput [type]="showPassword ? 'text' : 'password'" [(ngModel)]="user.password" name="password" [required]="isPasswordRequired" autocomplete="current-password">
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" tabindex="-1">
           <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
-        <mat-hint>Enter a secure password</mat-hint>
+        <mat-icon matPrefix>lock</mat-icon>
+        <mat-hint>Digite uma senha forte</mat-hint>
       </mat-form-field>
     </ng-container>
+    <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;">
+      <button mat-stroked-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-flat-button color="primary" type="submit">
+        <mat-icon style="margin-right: 4px;">{{ isEdit ? 'save' : 'person_add' }}</mat-icon>
+        {{ isEdit ? 'Salvar' : 'Cadastrar' }}
+      </button>
+    </div>
   </form>
-</mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-flat-button color="primary" (click)="onSubmit()">
-    {{ isEdit ? 'Save Changes' : 'Create User' }}
-  </button>
-</mat-dialog-actions>
+</mat-card>

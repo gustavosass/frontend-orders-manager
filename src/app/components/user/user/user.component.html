@@ -5,16 +5,23 @@
 
   <mat-sidenav-content [class.content-shifted]="!sidebarCollapsed" [class.content-normal]="sidebarCollapsed">
     <div class="dashboard-content">
-      <mat-toolbar class="mat-elevation-z2" style="margin-bottom: 24px;">
+      <mat-toolbar color="primary" class="mat-elevation-z2" style="margin-bottom: 24px;">
         <span>Usuários</span>
         <span class="spacer"></span>
-        <button mat-icon-button color="primary" (click)="createUser()">
+        <button mat-icon-button color="accent" (click)="createUser()">
           <mat-icon>add</mat-icon>
         </button>
       </mat-toolbar>
       <mat-card>
         <mat-card-content>
-          <div class="users-table-wrapper">
+          <div class="filter-container" style="margin-bottom: 16px;">
+            <mat-form-field appearance="outline" style="width: 320px; max-width: 100%;">
+              <mat-label>Filtrar</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Maria" #input>
+              <button mat-icon-button matSuffix tabindex="-1" disabled><mat-icon>search</mat-icon></button>
+            </mat-form-field>
+          </div>
+          <div class="table-responsive">
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1">
               <!-- ID Column -->
               <ng-container matColumnDef="id">
@@ -34,19 +41,19 @@
               <!-- Role Column -->
               <ng-container matColumnDef="role">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Permissão</th>
-                <td mat-cell *matCellDef="let user">{{ user.role}}</td>
+                <td mat-cell *matCellDef="let user">{{ user.role }}</td>
               </ng-container>
               <!-- Actions Column -->
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Ações</th>
                 <td mat-cell *matCellDef="let user">
-                  <button mat-icon-button color="primary" (click)="updateUser(user)">
+                  <button mat-icon-button color="primary" (click)="updateUser(user)" matTooltip="Editar">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button mat-icon-button color="warn" (click)="deleteUser(user.id)">
+                  <button mat-icon-button color="warn" (click)="deleteUser(user.id)" matTooltip="Excluir">
                     <mat-icon>delete</mat-icon>
                   </button>
-                  <button mat-icon-button color="primary" (click)="updatePassword(user.id)">
+                  <button mat-icon-button color="primary" (click)="updatePassword(user.id)" matTooltip="Alterar senha">
                     <mat-icon>lock</mat-icon>
                   </button>
                 </td>
@@ -55,9 +62,10 @@
               <tr mat-header-row *matHeaderRowDef="['id', 'name', 'email', 'role', 'actions']"></tr>
               <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'email', 'role', 'actions'];"></tr>
             </table>
-            <mat-paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"
-              showFirstLastButtons></mat-paginator>
           </div>
+
+          <mat-paginator [length]="dataSource.data.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"
+            showFirstLastButtons></mat-paginator>
           <tr mat-row *matNoDataRow>
             <td colspan="5" class="no-users">Nenhum usuário encontrado.</td>
           </tr>
