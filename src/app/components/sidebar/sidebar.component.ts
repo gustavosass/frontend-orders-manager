@@ -29,7 +29,7 @@ export class SidebarComponent {
     { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
     { label: 'Usuários', icon: 'supervisor_account', route: '/users' },
     { label: 'Clientes', icon: 'people', route: '/clients' },
-    { label: 'Configurações', icon: 'tune', route: '/settings' },
+    { label: 'Configurações', icon: 'tune', route: '/configuration' },
     { label: 'Logout', icon: 'logout', route: '/login' }
   ];
 

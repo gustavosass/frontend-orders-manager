@@ -64,7 +64,9 @@
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Data de Nascimento</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="birthDate" required (dateInput)="onDateChange($event)" (change)="onDateChange($event)" (blur)="onDateBlur($event)" autocomplete="off">
+            <input matInput [matDatepicker]="picker" formControlName="birthDate" required
+              (dateInput)="onDateChange($event)" (change)="onDateChange($event)" (blur)="onDateBlur($event)"
+              autocomplete="off">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="formControls['birthDate'].errors?.['required']">
