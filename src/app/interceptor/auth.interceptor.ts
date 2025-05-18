@@ -9,13 +9,15 @@ import { throwError } from 'rxjs';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const excludedRoutes = ['/authenticate', '/refresh-token'];
   
-  console.log(req.url);
   if (excludedRoutes.some(route => req.url.includes(route))) {
     return next(req);
   }
 
-  const token = localStorage.getItem('accessToken');
-  const refreshToken = localStorage.getItem('refreshToken');
+  // Check if we're running in the browser
+  const isBrowser = typeof window !== 'undefined';
+  
+  const token = isBrowser ? localStorage.getItem('accessToken') : null;
+  const refreshToken = isBrowser ? localStorage.getItem('refreshToken') : null;
   
   const auth = inject(AuthService);
   

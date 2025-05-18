@@ -1,0 +1,18 @@
+<mat-sidenav-container class="configuration-layout">
+    <mat-sidenav #drawer mode="side" [opened]="true" class="sidebar-sidenav" [class.collapsed]="sidebarCollapsed">
+        <app-sidebar [collapsed]="sidebarCollapsed" (collapsedChange)="sidebarCollapsed = $event"></app-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content [class.content-shifted]="!sidebarCollapsed" [class.content-normal]="sidebarCollapsed">
+        <div class="dashboard-content">
+            <a *ngFor="let item of configurationItems" [routerLink]="item.route" routerLinkActive="active"
+                class="config-item">
+                <mat-card class="welcome-card">
+                    <div class="config-content">
+                        <span>{{item.label}}</span>
+                    </div>
+                </mat-card>
+            </a>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
